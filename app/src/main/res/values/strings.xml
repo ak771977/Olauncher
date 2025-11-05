@@ -158,6 +158,7 @@
     <string name="dual_timezone">Dual timezone (Local | NY)</string>
     <string name="use_default_app_drawer">Use default app drawer</string>
     <string name="clock_size">Clock size (dual timezone)</string>
+    <string name="date_size">Date size (dual timezone)</string>
     <string name="clock_60">60%</string>
     <string name="clock_65">65%</string>
     <string name="clock_70">70%</string>
