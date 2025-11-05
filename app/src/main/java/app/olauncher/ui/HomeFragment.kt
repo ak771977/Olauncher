@@ -246,6 +246,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.clockSecondary.isVisible = showDualTimezone
         binding.clockSeparator.isVisible = showDualTimezone
 
+        // Adjust clock sizes - make them smaller when showing dual timezone
+        val clockSizeMultiplier = if (showDualTimezone) 0.65f else 1.0f
+        val originalSize = resources.getDimension(R.dimen.time_size)
+        binding.clock.textSize = (originalSize / resources.displayMetrics.scaledDensity) * clockSizeMultiplier
+        binding.clockSecondary.textSize = (originalSize / resources.displayMetrics.scaledDensity) * clockSizeMultiplier
+        binding.clockSeparator.textSize = (originalSize / resources.displayMetrics.scaledDensity) * clockSizeMultiplier
+
 //        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
         val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
         var dateText = dateFormat.format(Date())
@@ -465,11 +472,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun openDefaultAppDrawer() {
         try {
-            // Open the default launcher's app drawer
-            val intent = Intent(Intent.ACTION_ALL_APPS)
-            startActivity(intent)
+            // Use Android's app picker to show all apps with icons
+            val mainIntent = Intent(Intent.ACTION_MAIN)
+            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+
+            val pickIntent = Intent(Intent.ACTION_PICK_ACTIVITY)
+            pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent)
+            pickIntent.putExtra(Intent.EXTRA_TITLE, "Select App")
+            startActivity(pickIntent)
         } catch (e: Exception) {
-            // Fall back to custom app list if default drawer can't be opened
+            // Fall back to custom app list if picker doesn't work
             showAppList(Constants.FLAG_LAUNCH_APP)
         }
     }
