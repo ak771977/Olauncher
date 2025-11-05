@@ -26,6 +26,7 @@ class Prefs(context: Context) {
     private val STATUS_BAR = "STATUS_BAR"
     private val DATE_TIME_VISIBILITY = "DATE_TIME_VISIBILITY"
     private val DUAL_TIMEZONE_ENABLED = "DUAL_TIMEZONE_ENABLED"
+    private val DUAL_TIMEZONE_CLOCK_SCALE = "DUAL_TIMEZONE_CLOCK_SCALE"
     private val USE_DEFAULT_APP_DRAWER = "USE_DEFAULT_APP_DRAWER"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
@@ -160,6 +161,10 @@ class Prefs(context: Context) {
     var dualTimezoneEnabled: Boolean
         get() = prefs.getBoolean(DUAL_TIMEZONE_ENABLED, false)
         set(value) = prefs.edit().putBoolean(DUAL_TIMEZONE_ENABLED, value).apply()
+
+    var dualTimezoneClockScale: Float
+        get() = prefs.getFloat(DUAL_TIMEZONE_CLOCK_SCALE, 0.75f)
+        set(value) = prefs.edit().putFloat(DUAL_TIMEZONE_CLOCK_SCALE, value).apply()
 
     var useDefaultAppDrawer: Boolean
         get() = prefs.getBoolean(USE_DEFAULT_APP_DRAWER, false)

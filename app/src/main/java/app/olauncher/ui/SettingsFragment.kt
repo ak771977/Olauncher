@@ -79,6 +79,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateStatusBar()
         populateDateTime()
         populateDualTimezone()
+        populateClockSize()
         populateDefaultAppDrawer()
         populateSwipeApps()
         populateSwipeDownAction()
@@ -93,6 +94,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         binding.textSizesLayout.visibility = View.GONE
+        binding.clockSizesLayout?.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -147,6 +149,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
             R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
             R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
+
+            R.id.clockSizeValue -> binding.clockSizesLayout?.visibility = View.VISIBLE
+            R.id.clockSize60 -> updateClockScale(Constants.ClockScale.SIXTY)
+            R.id.clockSize65 -> updateClockScale(Constants.ClockScale.SIXTYFIVE)
+            R.id.clockSize70 -> updateClockScale(Constants.ClockScale.SEVENTY)
+            R.id.clockSize75 -> updateClockScale(Constants.ClockScale.SEVENTYFIVE)
+            R.id.clockSize80 -> updateClockScale(Constants.ClockScale.EIGHTY)
+            R.id.clockSize85 -> updateClockScale(Constants.ClockScale.EIGHTYFIVE)
+            R.id.clockSize90 -> updateClockScale(Constants.ClockScale.NINETY)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -257,6 +268,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.textSize6.setOnClickListener(this)
         binding.textSize7.setOnClickListener(this)
 
+        binding.clockSizeValue?.setOnClickListener(this)
+        binding.clockSize60?.setOnClickListener(this)
+        binding.clockSize65?.setOnClickListener(this)
+        binding.clockSize70?.setOnClickListener(this)
+        binding.clockSize75?.setOnClickListener(this)
+        binding.clockSize80?.setOnClickListener(this)
+        binding.clockSize85?.setOnClickListener(this)
+        binding.clockSize90?.setOnClickListener(this)
+
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
         binding.appThemeText.setOnLongClickListener(this)
@@ -347,6 +367,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dualTimezoneToggle?.text = getString(
             if (prefs.dualTimezoneEnabled) R.string.on else R.string.off
         )
+    }
+
+    private fun updateClockScale(scale: Float) {
+        if (prefs.dualTimezoneClockScale == scale) return
+        prefs.dualTimezoneClockScale = scale
+        populateClockSize()
+        viewModel.toggleDateTime()
+    }
+
+    private fun populateClockSize() {
+        val scalePercent = (prefs.dualTimezoneClockScale * 100).toInt()
+        binding.clockSizeValue?.text = "$scalePercent%"
     }
 
     private fun toggleDefaultAppDrawer() {

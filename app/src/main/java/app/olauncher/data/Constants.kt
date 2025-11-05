@@ -56,6 +56,16 @@ object Constants {
         const val SEVEN = 1.3f
     }
 
+    object ClockScale {
+        const val SIXTY = 0.60f
+        const val SIXTYFIVE = 0.65f
+        const val SEVENTY = 0.70f
+        const val SEVENTYFIVE = 0.75f
+        const val EIGHTY = 0.80f
+        const val EIGHTYFIVE = 0.85f
+        const val NINETY = 0.90f
+    }
+
     object CharacterIndicator{
         const val SHOW = 102
         const val HIDE = 101

@@ -157,4 +157,12 @@
     <string name="hey">Hey</string>
     <string name="dual_timezone">Dual timezone (Local | NY)</string>
     <string name="use_default_app_drawer">Use default app drawer</string>
+    <string name="clock_size">Clock size (dual timezone)</string>
+    <string name="clock_60">60%</string>
+    <string name="clock_65">65%</string>
+    <string name="clock_70">70%</string>
+    <string name="clock_75">75%</string>
+    <string name="clock_80">80%</string>
+    <string name="clock_85">85%</string>
+    <string name="clock_90">90%</string>
 </resources>
