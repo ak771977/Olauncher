@@ -249,9 +249,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         // Adjust clock sizes - ONLY when showing dual timezone (to fit both side-by-side)
         // When dual timezone is OFF, clock uses original XML-defined size
         if (showDualTimezone) {
-            // Get original size in pixels, convert to SP, then make it 65% smaller
+            // Get original size in pixels, convert to SP, then make it 70% of original
             val originalSizePx = resources.getDimension(R.dimen.time_size)
-            val smallerSizeSp = (originalSizePx / resources.displayMetrics.scaledDensity) * 0.65f
+            val smallerSizeSp = (originalSizePx / resources.displayMetrics.scaledDensity) * 0.70f
             binding.clock.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, smallerSizeSp)
             binding.clockSecondary.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, smallerSizeSp)
             binding.clockSeparator.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, smallerSizeSp)
