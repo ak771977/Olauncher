@@ -1,6 +1,8 @@
 package app.olauncher.ui
 
+import android.app.Activity
 import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -488,10 +490,34 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             val pickIntent = Intent(Intent.ACTION_PICK_ACTIVITY)
             pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent)
             pickIntent.putExtra(Intent.EXTRA_TITLE, "Select App")
-            startActivity(pickIntent)
+            startActivityForResult(pickIntent, Constants.REQUEST_CODE_APP_PICKER)
         } catch (e: Exception) {
             // Fall back to custom app list if picker doesn't work
             showAppList(Constants.FLAG_LAUNCH_APP)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Constants.REQUEST_CODE_APP_PICKER && resultCode == Activity.RESULT_OK) {
+            data?.let { intent ->
+                // Get the selected activity component
+                val componentName = intent.getParcelableExtra<ComponentName>(Intent.EXTRA_COMPONENT_NAME)
+                componentName?.let {
+                    // Launch the selected app
+                    try {
+                        val launchIntent = Intent(Intent.ACTION_MAIN).apply {
+                            addCategory(Intent.CATEGORY_LAUNCHER)
+                            component = it
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                        startActivity(launchIntent)
+                    } catch (e: Exception) {
+                        requireContext().showToast("Failed to launch app")
+                    }
+                }
+            }
         }
     }
 
