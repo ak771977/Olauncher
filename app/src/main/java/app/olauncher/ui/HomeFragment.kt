@@ -501,21 +501,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == Constants.REQUEST_CODE_APP_PICKER && resultCode == Activity.RESULT_OK) {
-            data?.let { intent ->
-                // Get the selected activity component
-                val componentName = intent.getParcelableExtra<ComponentName>(Intent.EXTRA_COMPONENT_NAME)
-                componentName?.let {
-                    // Launch the selected app
-                    try {
-                        val launchIntent = Intent(Intent.ACTION_MAIN).apply {
-                            addCategory(Intent.CATEGORY_LAUNCHER)
-                            component = it
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        }
-                        startActivity(launchIntent)
-                    } catch (e: Exception) {
-                        requireContext().showToast("Failed to launch app")
-                    }
+            data?.let { selectedIntent ->
+                // The returned intent IS the launch intent for the selected app
+                try {
+                    selectedIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(selectedIntent)
+                } catch (e: Exception) {
+                    requireContext().showToast("Failed to launch app")
                 }
             }
         }
