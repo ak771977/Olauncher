@@ -465,19 +465,12 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun openDefaultAppDrawer() {
         try {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_APP_LAUNCHER)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            // Open the default launcher's app drawer
+            val intent = Intent(Intent.ACTION_ALL_APPS)
             startActivity(intent)
         } catch (e: Exception) {
-            // If that doesn't work, try showing all apps
-            try {
-                val intent = Intent(Intent.ACTION_ALL_APPS)
-                startActivity(intent)
-            } catch (e: Exception) {
-                // Fall back to custom app list if default drawer can't be opened
-                showAppList(Constants.FLAG_LAUNCH_APP)
-            }
+            // Fall back to custom app list if default drawer can't be opened
+            showAppList(Constants.FLAG_LAUNCH_APP)
         }
     }
 

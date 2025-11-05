@@ -216,8 +216,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dateTimeOn.setOnClickListener(this)
         binding.dateTimeOff.setOnClickListener(this)
         binding.dateOnly.setOnClickListener(this)
-        binding.dualTimezoneToggle.setOnClickListener(this)
-        binding.defaultAppDrawerToggle.setOnClickListener(this)
+        binding.dualTimezoneToggle?.setOnClickListener(this)
+        binding.defaultAppDrawerToggle?.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
         binding.swipeDownAction.setOnClickListener(this)
@@ -344,7 +344,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateDualTimezone() {
-        binding.dualTimezoneToggle.text = getString(
+        binding.dualTimezoneToggle?.text = getString(
             if (prefs.dualTimezoneEnabled) R.string.on else R.string.off
         )
     }
@@ -355,7 +355,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateDefaultAppDrawer() {
-        binding.defaultAppDrawerToggle.text = getString(
+        binding.defaultAppDrawerToggle?.text = getString(
             if (prefs.useDefaultAppDrawer) R.string.on else R.string.off
         )
     }
