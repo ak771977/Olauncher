@@ -43,12 +43,17 @@ jobs:
     - name: Build Debug APK
       run: ./gradlew assembleDebug --stacktrace --info --no-daemon
 
+    - name: Rename APK
+      if: success()
+      run: |
+        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/Olauncher-Custom.apk
+
     - name: Upload APK as Artifact
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: olauncher-custom-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: Olauncher-Custom
+        path: app/build/outputs/apk/debug/Olauncher-Custom.apk
         retention-days: 30
 
     - name: Get commit info
@@ -77,14 +82,14 @@ jobs:
           - 👆 All Swipe Gestures Functional
 
           ### Installation:
-          1. Download `app-debug.apk` below
+          1. Download **Olauncher-Custom.apk** below
           2. Transfer to your Android device
           3. Install (enable "Unknown Sources" if needed)
           4. Set as default launcher
           5. Long press home → Settings → Enable features
 
           This release is automatically updated on every commit.
-        files: app/build/outputs/apk/debug/app-debug.apk
+        files: app/build/outputs/apk/debug/Olauncher-Custom.apk
         draft: false
         prerelease: false
         make_latest: true
