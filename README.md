@@ -33,7 +33,7 @@ The APK is automatically built in the cloud. Just download and install!
 
 **Steps:**
 1. Go to **[Releases](https://github.com/ak771977/Olauncher/releases/latest)** page
-2. Download **"app-debug.apk"** from the Assets section
+2. Download **"Olauncher-Custom.apk"** from the Assets section
 3. Transfer APK to your Android phone
 4. Open and install (may need to enable "Install from Unknown Sources")
 5. Press Home button → Select Olauncher → **Always**
