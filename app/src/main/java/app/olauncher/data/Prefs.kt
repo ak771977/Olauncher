@@ -25,6 +25,8 @@ class Prefs(context: Context) {
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
     private val DATE_TIME_VISIBILITY = "DATE_TIME_VISIBILITY"
+    private val DUAL_TIMEZONE_ENABLED = "DUAL_TIMEZONE_ENABLED"
+    private val USE_DEFAULT_APP_DRAWER = "USE_DEFAULT_APP_DRAWER"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
     private val HIDDEN_APPS = "HIDDEN_APPS"
@@ -154,6 +156,14 @@ class Prefs(context: Context) {
     var dateTimeVisibility: Int
         get() = prefs.getInt(DATE_TIME_VISIBILITY, Constants.DateTime.ON)
         set(value) = prefs.edit().putInt(DATE_TIME_VISIBILITY, value).apply()
+
+    var dualTimezoneEnabled: Boolean
+        get() = prefs.getBoolean(DUAL_TIMEZONE_ENABLED, false)
+        set(value) = prefs.edit().putBoolean(DUAL_TIMEZONE_ENABLED, value).apply()
+
+    var useDefaultAppDrawer: Boolean
+        get() = prefs.getBoolean(USE_DEFAULT_APP_DRAWER, false)
+        set(value) = prefs.edit().putBoolean(USE_DEFAULT_APP_DRAWER, value).apply()
 
     var swipeLeftEnabled: Boolean
         get() = prefs.getBoolean(SWIPE_LEFT_ENABLED, true)

@@ -78,6 +78,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateAlignment()
         populateStatusBar()
         populateDateTime()
+        populateDualTimezone()
+        populateDefaultAppDrawer()
         populateSwipeApps()
         populateSwipeDownAction()
         populateActionHints()
@@ -115,6 +117,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
             R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
             R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
+            R.id.dualTimezoneToggle -> toggleDualTimezone()
+            R.id.defaultAppDrawerToggle -> toggleDefaultAppDrawer()
             R.id.appThemeText -> binding.appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
@@ -212,6 +216,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dateTimeOn.setOnClickListener(this)
         binding.dateTimeOff.setOnClickListener(this)
         binding.dateOnly.setOnClickListener(this)
+        binding.dualTimezoneToggle.setOnClickListener(this)
+        binding.defaultAppDrawerToggle.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
         binding.swipeDownAction.setOnClickListener(this)
@@ -328,6 +334,29 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 Constants.DateTime.ON -> R.string.on
                 else -> R.string.off
             }
+        )
+    }
+
+    private fun toggleDualTimezone() {
+        prefs.dualTimezoneEnabled = !prefs.dualTimezoneEnabled
+        populateDualTimezone()
+        viewModel.toggleDateTime()
+    }
+
+    private fun populateDualTimezone() {
+        binding.dualTimezoneToggle.text = getString(
+            if (prefs.dualTimezoneEnabled) R.string.on else R.string.off
+        )
+    }
+
+    private fun toggleDefaultAppDrawer() {
+        prefs.useDefaultAppDrawer = !prefs.useDefaultAppDrawer
+        populateDefaultAppDrawer()
+    }
+
+    private fun populateDefaultAppDrawer() {
+        binding.defaultAppDrawerToggle.text = getString(
+            if (prefs.useDefaultAppDrawer) R.string.on else R.string.off
         )
     }
 

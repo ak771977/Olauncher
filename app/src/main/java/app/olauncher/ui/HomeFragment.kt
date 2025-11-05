@@ -241,6 +241,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
         binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
 
+        // Handle dual timezone display
+        val showDualTimezone = prefs.dualTimezoneEnabled && Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
+        binding.clockSecondary.isVisible = showDualTimezone
+        binding.clockSeparator.isVisible = showDualTimezone
+
 //        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
         val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
         var dateText = dateFormat.format(Date())
@@ -458,6 +463,24 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun openDefaultAppDrawer() {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_LAUNCHER)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        } catch (e: Exception) {
+            // If that doesn't work, try showing all apps
+            try {
+                val intent = Intent(Intent.ACTION_ALL_APPS)
+                startActivity(intent)
+            } catch (e: Exception) {
+                // Fall back to custom app list if default drawer can't be opened
+                showAppList(Constants.FLAG_LAUNCH_APP)
+            }
+        }
+    }
+
     private fun showStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
@@ -532,7 +555,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                showAppList(Constants.FLAG_LAUNCH_APP)
+                if (prefs.useDefaultAppDrawer) {
+                    openDefaultAppDrawer()
+                } else {
+                    showAppList(Constants.FLAG_LAUNCH_APP)
+                }
             }
 
             override fun onSwipeDown() {
@@ -579,7 +606,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                showAppList(Constants.FLAG_LAUNCH_APP)
+                if (prefs.useDefaultAppDrawer) {
+                    openDefaultAppDrawer()
+                } else {
+                    showAppList(Constants.FLAG_LAUNCH_APP)
+                }
             }
 
             override fun onSwipeDown() {

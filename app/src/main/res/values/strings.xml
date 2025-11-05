@@ -155,4 +155,6 @@
     <string name="alignment_changed">Alignment changed ✅</string>
     <string name="home_screen">Home screen</string>
     <string name="hey">Hey</string>
+    <string name="dual_timezone">Dual timezone (Local | NY)</string>
+    <string name="use_default_app_drawer">Use default app drawer</string>
 </resources>

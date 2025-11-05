@@ -26,15 +26,45 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-        <TextClock
-            android:id="@+id/clock"
-            style="@style/TextDefault"
+        <LinearLayout
+            android:id="@+id/clockContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:format12Hour="h:mm"
-            android:textSize="@dimen/time_size"
-            tools:text="02:34" />
+            android:orientation="horizontal">
+
+            <TextClock
+                android:id="@+id/clock"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:format12Hour="h:mm"
+                android:textSize="@dimen/time_size"
+                tools:text="02:34" />
+
+            <TextView
+                android:id="@+id/clockSeparator"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text=" | "
+                android:textSize="@dimen/time_size"
+                android:visibility="gone" />
+
+            <TextClock
+                android:id="@+id/clockSecondary"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:format12Hour="h:mm"
+                android:textSize="@dimen/time_size"
+                android:timeZone="America/New_York"
+                android:visibility="gone"
+                tools:text="05:34" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/date"
