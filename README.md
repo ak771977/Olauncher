@@ -25,9 +25,28 @@ This fork includes additional customization options:
 - Swipe gestures remain fully functional
 - Perfect for an ultra-minimal home screen
 
-## Install
+## Install This Custom Version
 
-#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from the [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+### 📥 Option 1: Download Pre-Built APK (Easiest - No Tools Needed!)
+
+The APK is automatically built in the cloud. Just download and install!
+
+**Steps:**
+1. Go to **[GitHub Actions](https://github.com/ak771977/Olauncher/actions)** page
+2. Click on the latest successful workflow run (look for green ✓ checkmark)
+3. Scroll down to "Artifacts" section
+4. Download **"olauncher-custom-debug"**
+5. Transfer APK to your Android phone
+6. Open and install (may need to enable "Install from Unknown Sources")
+7. Press Home button → Select Olauncher → **Always**
+
+**Tip:** Look for the most recent build at the top of the Actions page!
+
+---
+
+### 📦 Option 2: Original Olauncher (Without Custom Features)
+
+Install the original from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
@@ -36,13 +55,23 @@ This fork includes additional customization options:
     alt="Get it on Play Store"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
+---
+
 To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
 Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in the Olauncher settings for a complete list of features and FAQs.
 
-## Build from Source
+## Using the New Features
 
-Want to compile and use this custom version? Here's how:
+After installing the custom version:
+1. Long press anywhere on the home screen to open Settings
+2. Find **"Dual timezone (Local | NY)"** to enable dual clock display
+3. Find **"Use default app drawer"** to switch between drawer styles
+4. Set **"Apps on home screen"** to 0-8 (including 0 for completely empty home)
+
+## Build from Source (For Developers)
+
+Want to compile it yourself? Here's how:
 
 ### Prerequisites
 - Android Studio (latest version recommended)
@@ -78,18 +107,6 @@ Want to compile and use this custom version? Here's how:
      adb install app/build/outputs/apk/debug/app-debug.apk
      ```
    - **Manual:** Copy APK to phone → Open file → Install
-
-5. **Set as default launcher**
-   - Press Home button → Select Olauncher → Set as default
-   - Or: Settings → Apps → Default apps → Home app → Olauncher
-
-### Using the New Features
-
-After installation:
-1. Long press anywhere on the home screen to open Settings
-2. Find "Dual timezone (Local | NY)" to enable dual clock display
-3. Find "Use default app drawer" to switch between drawer styles
-4. Set "Apps on home screen" to 0-8 (including 0 for completely empty home)
 
 ##
 
