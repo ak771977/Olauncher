@@ -27,19 +27,47 @@ jobs:
     - name: Build Debug APK
       run: ./gradlew assembleDebug --stacktrace
 
-    - name: Upload APK
+    - name: Upload APK as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: olauncher-custom-debug
         path: app/build/outputs/apk/debug/app-debug.apk
         retention-days: 30
 
-    - name: Create Release (on tag)
-      if: startsWith(github.ref, 'refs/tags/')
+    - name: Get commit info
+      id: commit
+      run: |
+        echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
+
+    - name: Create/Update Latest Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: latest
+        name: "Latest Build (Auto-Updated)"
+        body: |
+          ## 🚀 Custom Olauncher - Latest Build
+
+          **Build Date:** ${{ steps.commit.outputs.date }}
+          **Commit:** ${{ steps.commit.outputs.sha_short }}
+
+          ### Features Included:
+          - ⏰ Dual Timezone Clock (Local | NY time)
+          - 📱 Default Android App Drawer Option
+          - 🎯 Zero to 8 Home Apps Support
+          - 👆 All Swipe Gestures Functional
+
+          ### Installation:
+          1. Download `app-debug.apk` below
+          2. Transfer to your Android device
+          3. Install (enable "Unknown Sources" if needed)
+          4. Set as default launcher
+          5. Long press home → Settings → Enable features
+
+          This release is automatically updated on every commit.
         files: app/build/outputs/apk/debug/app-debug.apk
         draft: false
         prerelease: false
+        make_latest: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

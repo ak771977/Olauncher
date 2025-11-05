@@ -32,15 +32,15 @@ This fork includes additional customization options:
 The APK is automatically built in the cloud. Just download and install!
 
 **Steps:**
-1. Go to **[GitHub Actions](https://github.com/ak771977/Olauncher/actions)** page
-2. Click on the latest successful workflow run (look for green ✓ checkmark)
-3. Scroll down to "Artifacts" section
-4. Download **"olauncher-custom-debug"**
-5. Transfer APK to your Android phone
-6. Open and install (may need to enable "Install from Unknown Sources")
-7. Press Home button → Select Olauncher → **Always**
+1. Go to **[Releases](https://github.com/ak771977/Olauncher/releases/latest)** page
+2. Download **"app-debug.apk"** from the Assets section
+3. Transfer APK to your Android phone
+4. Open and install (may need to enable "Install from Unknown Sources")
+5. Press Home button → Select Olauncher → **Always**
 
-**Tip:** Look for the most recent build at the top of the Actions page!
+**The "latest" release is auto-updated on every commit!**
+
+*Alternate:* You can also get builds from [GitHub Actions](https://github.com/ak771977/Olauncher/actions) → Latest run → Artifacts
 
 ---
 
