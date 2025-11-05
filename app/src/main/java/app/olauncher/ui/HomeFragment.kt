@@ -246,12 +246,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.clockSecondary.isVisible = showDualTimezone
         binding.clockSeparator.isVisible = showDualTimezone
 
-        // Adjust clock sizes - make them smaller when showing dual timezone
-        val clockSizeMultiplier = if (showDualTimezone) 0.65f else 1.0f
-        val originalSize = resources.getDimension(R.dimen.time_size)
-        binding.clock.textSize = (originalSize / resources.displayMetrics.scaledDensity) * clockSizeMultiplier
-        binding.clockSecondary.textSize = (originalSize / resources.displayMetrics.scaledDensity) * clockSizeMultiplier
-        binding.clockSeparator.textSize = (originalSize / resources.displayMetrics.scaledDensity) * clockSizeMultiplier
+        // Adjust clock sizes - ONLY when showing dual timezone (to fit both side-by-side)
+        // When dual timezone is OFF, clock uses original XML-defined size
+        if (showDualTimezone) {
+            val originalSize = resources.getDimension(R.dimen.time_size)
+            val smallerSize = (originalSize / resources.displayMetrics.scaledDensity) * 0.65f
+            binding.clock.textSize = smallerSize
+            binding.clockSecondary.textSize = smallerSize
+            binding.clockSeparator.textSize = smallerSize
+        }
 
 //        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
         val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
