@@ -255,6 +255,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             binding.clock.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, scaledSizeSp)
             binding.clockSecondary.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, scaledSizeSp)
             binding.clockSeparator.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, scaledSizeSp)
+
+            // Also scale the date to keep proportions consistent
+            val originalDateSizePx = resources.getDimension(R.dimen.date_size)
+            val scaledDateSizeSp = (originalDateSizePx / resources.displayMetrics.scaledDensity) * prefs.dualTimezoneClockScale
+            binding.date.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, scaledDateSizeSp)
         }
 
 //        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
